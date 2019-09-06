@@ -31,20 +31,36 @@ with open(csvpath, newline='') as csvfile:
     totalamount = 0
     prevmonthamt = 0
     currmonthamt = 0
-    change = 0
+    
+    totalchange = 0
+    currentdiff = 0
+    maxposdiff = 0
+    maxnegdiff = 0
+
+
     # Read each row of data after the header
     for row in csvreader:
         noofmonths = noofmonths + 1
         totalamount = totalamount + int(row[1])
         currmonthamt = int(row[1])
         if noofmonths != 1:
-            change = change + (currmonthamt - prevmonthamt)
-            print(change)
+            currentdiff = currmonthamt - prevmonthamt
+            totalchange = totalchange + (currentdiff)
+            if currentdiff > 0:
+                if currentdiff > maxposdiff:
+                    maxposdiff = currentdiff
+                    maxposmonth = row[0]
+            elif currentdiff < 0:
+                if currentdiff < maxnegdiff:
+                    maxnegdiff = currentdiff
+                    maxnegmonth = row[0]
         prevmonthamt = currmonthamt
 
     print(f"No of months : {noofmonths}")
     print(f"Total Amount: {totalamount}")
-    print(f"Average Change: {round(change/(noofmonths-1),2)}")
+    print(f"Average Change: {round(totalchange/(noofmonths-1),2)}")
+    print(f"Greatest Increase in Profits: {maxposmonth} ({maxposdiff})")
+    print(f"Greatest Decrease in Profits: {maxnegmonth} ({maxnegdiff})")
 
 
 
