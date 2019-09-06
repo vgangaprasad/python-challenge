@@ -29,14 +29,22 @@ with open(csvpath, newline='') as csvfile:
 
     noofmonths = 0
     totalamount = 0
+    prevmonthamt = 0
+    currmonthamt = 0
+    change = 0
     # Read each row of data after the header
     for row in csvreader:
         noofmonths = noofmonths + 1
-        totalamount = totalamount + row[1]
+        totalamount = totalamount + int(row[1])
+        currmonthamt = int(row[1])
+        if noofmonths != 1:
+            change = change + (currmonthamt - prevmonthamt)
+            print(change)
+        prevmonthamt = currmonthamt
 
     print(f"No of months : {noofmonths}")
     print(f"Total Amount: {totalamount}")
-
+    print(f"Average Change: {round(change/(noofmonths-1),2)}")
 
 
 
