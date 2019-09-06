@@ -25,9 +25,18 @@ with open(csvpath, newline='') as csvfile:
 
     # Read the header row first (skip this step if there is now header)
     csv_header = next(csvreader)
-    print(f"CSV Header: {csv_header}")
+    #print(f"CSV Header: {csv_header}")
 
+    noofmonths = 0
+    totalamount = 0
     # Read each row of data after the header
     for row in csvreader:
-        print(row)
+        noofmonths = noofmonths + 1
+        totalamount = totalamount + row[1]
+
+    print(f"No of months : {noofmonths}")
+    print(f"Total Amount: {totalamount}")
+
+
+
 
