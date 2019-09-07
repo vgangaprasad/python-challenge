@@ -48,17 +48,17 @@ with open(csvpath, newline='') as csvfile:
                     maxnegmonth = row[0]
         prevmonthamt = currmonthamt
 
-    def printoutput():
-        print("Financial Analysis")
-        print("----------------------------")
-        print(f"Total months : {noofmonths}")
-        print(f"Total : {totalamount}")
-        print(f"Average Change: {round(totalchange/(noofmonths-1),2)}")
-        print(f"Greatest Increase in Profits: {maxposmonth} (${maxposdiff})")
-        print(f"Greatest Decrease in Profits: {maxnegmonth} (${maxnegdiff})")
+def printoutput():
+    print("Financial Analysis")
+    print("----------------------------")
+    print(f"Total months: {noofmonths}")
+    print(f"Total: {totalamount}")
+    print(f"Average Change: {round(totalchange/(noofmonths-1),2)}")
+    print(f"Greatest Increase in Profits: {maxposmonth} (${maxposdiff})")
+    print(f"Greatest Decrease in Profits: {maxnegmonth} (${maxnegdiff})")
 
 
-    printoutput()
+printoutput()
 
-    sys.stdout = open('log.txt', 'w')
-    printoutput()
+sys.stdout = open('log.txt', 'w')
+printoutput()
