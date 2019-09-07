@@ -34,6 +34,8 @@ def calculate_percent(count = 0, totalcount = 0):
     return round((count/totalcount) * 100,3)
 
 def printoutput():
+    winner = ""
+    winnercount = 0
     print("Election Results")
     print("----------------------------")
     print(f"Total votes: {totalvotes}")
@@ -43,14 +45,17 @@ def printoutput():
         print(f"{candidate} : \
 {calculate_percent(candidate_dict[candidate],totalvotes)}00% \
 ({candidate_dict[candidate]})") 
+        if winnercount < candidate_dict[candidate]:
+            winnercount = candidate_dict[candidate]
+            winner = candidate
+    print("----------------------------")
+    print(f"Winner: {winner}")
+    print("----------------------------")
 
 
         #print(candidate)
 
 
 printoutput()
-print("----------------------------")
-print(f"Winner: ")
-print("----------------------------")
 sys.stdout = open('log.txt', 'w')
 printoutput()
