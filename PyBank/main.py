@@ -7,8 +7,6 @@ import csv
 
 csvpath = os.path.join('.', 'Resources', 'budget_data.csv')
 
-# Method 2: Improved Reading using CSV module
-
 with open(csvpath, newline='') as csvfile:
 
     # CSV reader specifies delimiter and variable that holds contents
@@ -32,12 +30,22 @@ with open(csvpath, newline='') as csvfile:
 
     # Read each row of data after the header
     for row in csvreader:
+        # number of months is calculated based on the number of rows
         noofmonths = noofmonths + 1
+        # total amount variable is used to track the total amount from all the rows.
         totalamount = totalamount + int(row[1])
+        #currmonthamt variable is used to save the amount from the current row.
         currmonthamt = int(row[1])
+        # Following logic is used to find out the Greatest increase/decrease in profits
         if noofmonths != 1:
+            # currentdiff variable is used to find out the amount difference between the
+            # current month and previous month
             currentdiff = currmonthamt - prevmonthamt
+            #totalchange variable is used to find out the average difference in change
             totalchange = totalchange + (currentdiff)
+            # Everytime there is a positive/negative difference, it is compared against the previous
+            # positive/negative difference and if new one is more then the new one is set as the 
+            # greatest increase/negative amount
             if currentdiff > 0:
                 if currentdiff > maxposdiff:
                     maxposdiff = currentdiff
@@ -59,6 +67,5 @@ def printoutput():
 
 
 printoutput()
-
 sys.stdout = open('log.txt', 'w')
 printoutput()
